@@ -1,6 +1,6 @@
 data "terraform_remote_state" "vpc" {
   backend = "s3"
-  config {
+  config = {
     bucket = "terraform-gvl"
     key    = "vpc/${var.ENV}/terraform.tfstate"
     region = "us-east-1"
