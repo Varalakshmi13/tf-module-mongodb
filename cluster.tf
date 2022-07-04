@@ -36,6 +36,7 @@ resource "aws_security_group" "allow_mongodb" {
     to_port          = 5672
     protocol         = "tcp"
     cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, var.WORKSTATION_IP]
+    }
 
   egress {
     from_port        = 0
