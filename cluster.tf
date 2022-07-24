@@ -20,10 +20,10 @@ resource "aws_docdb_subnet_group" "docdb" {
 }
 
 resource "aws_docdb_cluster_instance" "cluster_instances" {
-  count              = 1
+  count              = var.DOCDB_INSTANCE_COUNT
   identifier         = "roboshop-${var.ENV}"
   cluster_identifier = aws_docdb_cluster.docdb.id
-  instance_class     = "db.t3.medium"
+  instance_class     = var.DOCDB_INSTANCE_CLASS
 }
 
 resource "aws_security_group" "allow_mongodb" {
@@ -33,8 +33,8 @@ resource "aws_security_group" "allow_mongodb" {
 
   ingress {
     description      = "TLS from VPC"
-    from_port        = 27017
-    to_port          = 27017
+    from_port        = var.DOCDB_PORT
+    to_port          = var.DOCDB_PORT
     protocol         = "tcp"
     cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, var.WORKSTATION_IP]
     }
