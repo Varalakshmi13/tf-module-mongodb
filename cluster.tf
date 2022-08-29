@@ -1,8 +1,8 @@
 resource "aws_docdb_cluster" "docdb" {
   cluster_identifier      = "roboshop-${var.ENV}"
   engine                  = "docdb"
-  master_username         = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["DOCUMENTDB_MASTER_USERNAME"]
-  master_password         = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["DOCUMENTDB_MASTER_PASSWORD"]
+  master_username         = local.USERNAME
+  master_password         = local.PASSWORD
   #this is not for prod
   skip_final_snapshot     = true
   db_subnet_group_name    = aws_docdb_subnet_group.docdb.name
