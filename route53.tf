@@ -1,4 +1,4 @@
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "record" {
   zone_id = data.terraform_remote_state.vpc.outputs.HOSTEDZONE_PRIVATE_ID
   name    = local.DNS_NAME
   type    = "CNAME"
